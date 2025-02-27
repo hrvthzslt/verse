@@ -1,0 +1,10 @@
+#!/bin/bash
+
+/bin/ollama serve &
+pid=$!
+
+sleep 5
+
+ollama create shake -f Modelfile
+
+wait $pid

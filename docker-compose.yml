@@ -1,0 +1,29 @@
+services:
+  ollama:
+    build:
+      context: ./docker/ollama/
+    container_name: ollama
+    ports:
+      - 11434:11434
+    networks:
+      - verse-network
+    volumes:
+      - ./volumes/ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD-SHELL", "command ollama"]
+      interval: 5s
+      retries: 3
+  hollama:
+    image: ghcr.io/fmaclen/hollama:latest
+    container_name: hollama
+    ports:
+      - 4173:4173
+    networks:
+      - verse-network
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+networks:
+  verse-network:
+    external: false
