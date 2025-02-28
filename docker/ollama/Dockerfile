@@ -2,8 +2,11 @@ FROM ollama/ollama:0.5.12
 
 WORKDIR /root/verse
 
-COPY ./Modelfile Modelfile
-COPY ./entrypoint entrypoint
-RUN chmod +x entrypoint
+COPY ./basemodel basemodel
 
-ENTRYPOINT ["/root/verse/entrypoint"]
+RUN ollama serve & sleep 5 && ollama pull $(cat basemodel)
+
+COPY ./Modelfile Modelfile
+RUN sed -i 's/basemodel/"$(cat basemodel)"/g' Modelfile
+
+RUN ollama serve & sleep 5 && ollama create shake -f Modelfile
