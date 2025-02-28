@@ -1,1 +1,1 @@
-FROM borch/phi3_speed_chat
+FROM llama3.2:1b
