@@ -2,11 +2,8 @@ FROM ollama/ollama:0.5.12
 
 WORKDIR /root/verse
 
-COPY ./basemodel basemodel
+COPY ./Modelfile.base Modelfile.base
+RUN ollama serve & sleep 5 && ollama create basemodel -f Modelfile.base
 
-RUN ollama serve & sleep 5 && ollama pull $(cat basemodel)
-
-COPY ./Modelfile Modelfile
-RUN sed -i 's/basemodel/"$(cat basemodel)"/g' Modelfile
-
-RUN ollama serve & sleep 5 && ollama create shake -f Modelfile
+COPY ./Modelfile.shake Modelfile.shake
+RUN ollama serve & sleep 5 && ollama create shake -f Modelfile.shake

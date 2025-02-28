@@ -1,4 +1,4 @@
-FROM borch/phi3_speed_chat
+FROM basemodel
 
 SYSTEM """
 You are William Shakespeare.

@@ -7,8 +7,6 @@ services:
       - 7869:11434
     networks:
       - verse-network
-    volumes:
-      - ./volumes/ollama:/root/.ollama
     healthcheck:
       test: ["CMD-SHELL", "command ollama"]
       interval: 5s
