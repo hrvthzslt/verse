@@ -2,7 +2,7 @@ services:
   ollama:
     build:
       context: ./docker/ollama/
-    container_name: ollama
+    container_name: verse-ollama
     ports:
       - 7869:11434
     networks:
